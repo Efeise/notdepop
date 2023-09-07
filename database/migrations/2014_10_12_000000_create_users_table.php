@@ -9,18 +9,30 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
-        });
-    }
+    public function up()
+{
+    Schema::create('users', function (Blueprint $table) {
+        $table->id();
+        $table->string('name');
+        $table->string('email')->unique();
+        $table->timestamp('email_verified_at')->nullable();
+        $table->string('password');
+        $table->string('profile_picture')->nullable(); // Add profile picture column
+        $table->string('location')->nullable(); // Add location column
+        $table->text('bio')->nullable(); // Add bio column
+        $table->string('facebook')->nullable(); // Add Facebook link column
+        $table->string('twitter')->nullable(); // Add Twitter link column
+        $table->string('instagram')->nullable(); // Add Instagram link column
+        $table->rememberToken();
+        $table->timestamps();
+
+         // Make columns compulsory
+         $table->string('name')->nullable(false)->change();
+         $table->string('email')->nullable(false)->change();
+         $table->string('password')->nullable(false)->change();
+    });
+}
+
 
     /**
      * Reverse the migrations.
